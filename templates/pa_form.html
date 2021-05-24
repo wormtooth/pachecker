@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+	<form action="{{ url_for('pa_result') }}" method="post" name="input">
+		{{ form.csrf_token }}
+		<table>
+			<tr>
+				<td>{{ form.payer.label }}: {{ form.payer }}</td>
+				<td>{{ form.drug.label }}: {{ form.drug }}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>{{ form.correct_diagnosis }} {{ form.correct_diagnosis.label }}</td>
+				<td>{{ form.tried_and_failed }} {{ form.tried_and_failed.label }}</td>
+				<td>{{ form.contraindication }} {{ form.contraindication.label }}</td>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td>{{ form.submit }}</td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}

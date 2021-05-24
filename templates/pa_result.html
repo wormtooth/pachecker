@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<table>
+    <tr>
+        <td>{{ form.payer.label }}: {{ form.payer.data }}</td>
+        <td>{{ form.drug.label }}: {{ form.drug.data }}</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>
+            {% if form.correct_diagnosis.data %}
+            &#10003;
+            {% else %}
+            &#10005;
+            {% endif %}
+            {{ form.correct_diagnosis.label }}
+        </td>
+        <td>
+            {% if form.tried_and_failed.data %}
+            &#10003;
+            {% else %}
+            &#10005;
+            {% endif %}
+            {{ form.tried_and_failed.label }}
+        </td>
+        <td>
+            {% if form.contraindication.data %}
+            &#10003;
+            {% else %}
+            &#10005;
+            {% endif %}
+            {{ form.contraindication.label }}
+        </td>
+    </tr>
+</table>
+	
+{% if code == 70 %}
+<p>
+    You need to file a prior authorization (code {{ code }}):<br/>
+    Drug {{ form.drug.data }} is not covered by the plan and is not on the formulary.
+</p>
+{% elif code == 75 %}
+<p>
+    You need to file a prior authorization (code {{ code }}):<br/>
+    Drug {{ form.drug.data }} is on the formulary but not preferred by your insurance
+    company.
+</p>
+{% elif code == 76 %}
+<p>
+    You only need to file a prior authorization if you refill drug {{ form.drug.data }}
+    many times (code {{ code }}).
+</p>
+{% endif %}
+
+{% if code != 0 %}
+<p>Your prior authorization has {{ result }}% chance to be approved!</p>
+{% endif %}
+{% endblock %}
