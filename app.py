@@ -8,7 +8,7 @@ from models import get_formulary, load_model
 rfc = load_model()
 formulary = get_formulary()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
@@ -39,7 +39,7 @@ def pa_result():
 
     result = rfc[(bin, drug, correct_diagnosis,
                   tried_and_failed, contraindication)]
-    result = f'{result * 100: .2f}'
+    result = round(result * 100, 2)
     code = formulary.get((form.payer.data, form.drug.data), 0)
     return render_template(
         'pa_result.html',

@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-	<form action="{{ url_for('pa_result') }}" method="post" name="input">
+	<form class="paform" action="{{ url_for('pa_result') }}" method="post" name="input">
 		{{ form.csrf_token }}
-		<table>
+		<span class="form_title"><h1>Prior Authorization Checker</h1></span>
+		<table class="patable box">
 			<tr>
-				<td>{{ form.payer.label }}: {{ form.payer }}</td>
-				<td>{{ form.drug.label }}: {{ form.drug }}</td>
+				<td><span class="label">{{ form.payer.label.text }}</span> {{ form.payer }}</td>
+				<td><span class="label">{{ form.drug.label.text }}</span> {{ form.drug }}</td>
 				<td></td>
 			</tr>
 
 			<tr>
-				<td>{{ form.correct_diagnosis }} {{ form.correct_diagnosis.label }}</td>
-				<td>{{ form.tried_and_failed }} {{ form.tried_and_failed.label }}</td>
-				<td>{{ form.contraindication }} {{ form.contraindication.label }}</td>
+				<td>{{ form.correct_diagnosis }} <span class="label">{{ form.correct_diagnosis.label.text }}</span></td>
+				<td>{{ form.tried_and_failed }} <span class="label">{{ form.tried_and_failed.label.text }}</span></td>
+				<td>{{ form.contraindication }} <span class="label">{{ form.contraindication.label.text }}</span></td>
 			</tr>
 
 			<tr>

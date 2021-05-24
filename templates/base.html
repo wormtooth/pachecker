@@ -6,15 +6,22 @@
 	{% else %}
 	<title>CoverMyMeds</title>
 	{% endif %}
-	<style>
-		table {
-			width: 500px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 <body>
-	<div class="content">
+	<div id="header">
+	</div>
+
+	<div id="content">
 	{% block content %}{% endblock %}
+	</div>
+
+	<div id="footer">
+		<a rel="nofollow" target="_blank" href="https://github.com/wormtooth/pachecker">Source Code</a>
+		|
+		<a rel="nofollow" target="_blank" href="https://github.com/domagal9/cmm_pa">Project Details</a>
+		|
+		<a rel="nofollow" target="_blank" href="https://www.erdosinstitute.org">The Erdős Institute</a>
 	</div>
 </body>
 </html>

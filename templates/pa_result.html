@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<table>
+<span class="form_title"><h1>Prior Authorization Checker - Result</h1></span>
+<table class="patable box">
     <tr>
-        <td>{{ form.payer.label }}: {{ form.payer.data }}</td>
-        <td>{{ form.drug.label }}: {{ form.drug.data }}</td>
+        <td>
+            <span class="label">{{ form.payer.label.text }}</span>
+            <span class="box">{{ form.payer.data }}</span>
+        </td>
+        <td>
+            <span class="label">{{ form.drug.label.text }}</span>
+            <span class="box">{{ form.drug.data }}</span>
+        </td>
         <td></td>
     </tr>
 
@@ -14,7 +21,7 @@
             {% else %}
             &#10005;
             {% endif %}
-            {{ form.correct_diagnosis.label }}
+            {{ form.correct_diagnosis.label.text }}
         </td>
         <td>
             {% if form.tried_and_failed.data %}
@@ -22,7 +29,7 @@
             {% else %}
             &#10005;
             {% endif %}
-            {{ form.tried_and_failed.label }}
+            {{ form.tried_and_failed.label.text }}
         </td>
         <td>
             {% if form.contraindication.data %}
@@ -30,7 +37,7 @@
             {% else %}
             &#10005;
             {% endif %}
-            {{ form.contraindication.label }}
+            {{ form.contraindication.label.text }}
         </td>
     </tr>
 </table>
@@ -54,6 +61,12 @@
 {% endif %}
 
 {% if code != 0 %}
-<p>Your prior authorization has {{ result }}% chance to be approved!</p>
+<p>
+    Your prior authorization has
+    <span style="font-size:xx-large; color: {{ 'red' if result < 50.0 else 'green' }};">
+        {{ result }}%
+    </span>
+    chance to be approved!
+</p>
 {% endif %}
 {% endblock %}

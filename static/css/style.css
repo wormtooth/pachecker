@@ -1,0 +1,48 @@
+#content {
+    display: table;
+    margin: auto;
+}
+
+#content .box {
+    border: solid 1px;
+    padding: 3px;
+}
+
+table.patable td {
+    padding: 10px;
+}
+
+#footer {
+    padding: .8em 0 3.6em;
+    margin-top: 1em;
+    line-height: 2.5;
+    color: #6E7173;
+    text-align: center;
+}
+
+#footer a {
+    font-size: .9em;
+}
+
+#footer a {
+    text-decoration: none;
+    color: #6E7173;
+}
+
+#footer a:hover {
+    outline: 0;
+}
+
+#footer a:hover, a:active {
+    color: #444;
+}
+
+input[type=submit] {
+    padding:5px 15px; 
+    background:#2CA4BF; 
+    color: white;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
