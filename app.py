@@ -1,12 +1,9 @@
 import os
 
-import numpy as np
-import pandas as pd
 from flask import Flask, redirect, render_template, url_for
 
 from forms.paform import PriorAuthForm
-from models import load_model
-from models.formulary import get_formulary
+from models import get_formulary, load_model
 
 rfc = load_model()
 formulary = get_formulary()
@@ -39,9 +36,10 @@ def pa_result():
     correct_diagnosis = int(form.correct_diagnosis.data)
     tried_and_failed = int(form.tried_and_failed.data)
     contraindication = int(form.contraindication.data)
-    
-    result = rfc[(bin, drug, correct_diagnosis, tried_and_failed, contraindication)]
-    result = np.round(result * 100, 2)
+
+    result = rfc[(bin, drug, correct_diagnosis,
+                  tried_and_failed, contraindication)]
+    result = f'{result * 100: .2f}'
     code = formulary.get((form.payer.data, form.drug.data), 0)
     return render_template(
         'pa_result.html',
