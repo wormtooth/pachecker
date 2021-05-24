@@ -33,15 +33,14 @@ def pa_form():
 @app.route('/pa_result', methods=['POST'])
 def pa_result():
     form = PriorAuthForm()
-    data = {
-        'bin': [form.payer.data],
-        'drug': [form.drug.data],
-        'tried_and_failed': [int(form.tried_and_failed.data)],
-        'correct_diagnosis': [int(form.correct_diagnosis.data)],
-        'contraindication': [int(form.contraindication.data)]
-    }
-    X = pd.DataFrame(data=data)
-    result = rfc.predict_proba(X)[0][1]
+
+    bin = form.payer.data
+    drug = form.drug.data
+    correct_diagnosis = int(form.correct_diagnosis.data)
+    tried_and_failed = int(form.tried_and_failed.data)
+    contraindication = int(form.contraindication.data)
+    
+    result = rfc[(bin, drug, correct_diagnosis, tried_and_failed, contraindication)]
     result = np.round(result * 100, 2)
     code = formulary.get((form.payer.data, form.drug.data), 0)
     return render_template(

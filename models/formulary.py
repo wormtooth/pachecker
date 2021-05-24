@@ -2,20 +2,7 @@ import json
 import os
 
 import utils
-
-
-def _flatten(formulary):
-    return [
-        {'key': key, 'val': val}
-        for key, val in formulary.items()
-    ]
-
-
-def _recover(formulary):
-    return {
-        tuple(item['key']): item['val']
-        for item in formulary
-    }
+from .tools import flatten_dict, recover_dict
 
 
 def get_formulary():
@@ -30,7 +17,7 @@ def get_formulary():
             pass
 
     if formulary:
-        return _recover(formulary)
+        return recover_dict(formulary)
 
     formulary = {}
     folder = utils.DATA_FOLDER
@@ -41,5 +28,5 @@ def get_formulary():
         formulary[payer, drug] = int(code)
 
     with open(cache_path, 'w') as f:
-        json.dump(_flatten(formulary), f)
+        json.dump(flatten_dict(formulary), f)
     return formulary

@@ -6,6 +6,8 @@ from sklearn.base import clone
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
+from .tools import load_model_from_json, convert_model_to_json
+
 MODEL_FOLDER = os.path.dirname(os.path.realpath(__file__))
 
 PA_RFC = Pipeline([
@@ -22,24 +24,21 @@ MODELS = {
     'pa_clf_rf': {
         'name': 'Random Forest',
         'model': PA_RFC,
-                'filename': 'pa_clf_rf.pkl',
-                'group': 'pa'
+        'group': 'pa'
     }
 }
 
 
 def load_model(model_id='pa_clf_rf'):
     config = MODELS[model_id]
-    path = os.path.join(MODEL_FOLDER, config['filename'])
+    path = os.path.join(MODEL_FOLDER, f'{model_id}.json')
     if os.path.exists(path):
-        with open(path, 'rb') as f:
-            model = pickle.load(f)
-        return model
+        return load_model_from_json(path)
 
     X, y = _load_data(config)
     model = clone(config['model']).fit(X, y)
-    with open(path, 'wb') as f:
-        pickle.dump(model, f)
+    model = convert_model_to_json(model, path)
+
     return model
 
 
