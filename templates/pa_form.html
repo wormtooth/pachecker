@@ -5,15 +5,15 @@
 		<span class="form_title"><h1>Prior Authorization Checker</h1></span>
 		<table class="patable box">
 			<tr>
-				<td><span class="label">{{ form.payer.label.text }}</span> {{ form.payer }}</td>
-				<td><span class="label">{{ form.drug.label.text }}</span> {{ form.drug }}</td>
+				<td><span class="label" title="{{ form.payer.description }}">{{ form.payer.label.text }}</span> {{ form.payer }}</td>
+				<td><span class="label" title="{{ form.drug.description }}">{{ form.drug.label.text }}</span> {{ form.drug }}</td>
 				<td></td>
 			</tr>
 
 			<tr>
-				<td>{{ form.correct_diagnosis }} <span class="label">{{ form.correct_diagnosis.label.text }}</span></td>
-				<td>{{ form.tried_and_failed }} <span class="label">{{ form.tried_and_failed.label.text }}</span></td>
-				<td>{{ form.contraindication }} <span class="label">{{ form.contraindication.label.text }}</span></td>
+				<td>{{ form.correct_diagnosis }} <span class="label" title="{{ form.correct_diagnosis.description }}">{{ form.correct_diagnosis.label.text }}</span></td>
+				<td>{{ form.tried_and_failed }} <span class="label" title ="{{ form.tried_and_failed.description }}">{{ form.tried_and_failed.label.text }}</span></td>
+				<td>{{ form.contraindication }} <span class="label" title="{{ form.contraindication.description }}">{{ form.contraindication.label.text }}</span></td>
 			</tr>
 
 			<tr>
